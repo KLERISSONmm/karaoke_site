@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Buscar Músicas - KARAOKÊ LIST</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="bg-dark">
+    <div class="container">
+        <h1 class="title">🔍 Buscar Karaokês</h1>
+        <form method="POST" action="/buscar" class="inline-form">
+            <input type="hidden" name="usuario" value="{{ usuario }}">
+            <input type="text" name="termo" placeholder="Digite o nome da música..." class="input-text" value="{{ termo }}">
+            <button type="submit" class="btn">Localizar</button>
+            <a href="/perfil?usuario={{ usuario }}" class="btn">← Voltar</a>
+        </form>
+
+        {% if resultados %}
+            <h2 class="subtitle">Resultados encontrados:</h2>
+            <div class="music-list">
+                {% for r in resultados %}
+                <div class="music-item">
+    		    <img src="{{ r.thumbnail_url }}" class="thumb">
+    		    <div class="music-info">
+        		<strong>{{ r.titulo }}</strong><br>
+        		<a href="{{ r.link }}" target="_blank" class="btn small">▶ Tocar em outra aba</a>
+      			<form method="POST" action="/adicionar_favorito" class="inline-form">
+            	            <input type="hidden" name="usuario" value="{{ usuario }}">
+           		    <input type="hidden" name="titulo" value="{{ r.titulo }}">
+            		    <input type="hidden" name="link" value="{{ r.link }}">
+            		    <input type="hidden" name="thumbnail_url" value="{{ r.thumbnail_url }}">
+            		    <input type="hidden" name="video_id" value="{{ r.id }}">
+            		    <button type="submit" class="btn small">⭐ Adicionar aos Favoritos</button>
+        		</form>
+    		    </div>
+		</div>
+                {% endfor %}
+            </div>
+        {% elif termo %}
+            <p>Nenhum resultado encontrado para "{{ termo }}".</p>
+        {% endif %}
+    </div>
+</body>
+</html>

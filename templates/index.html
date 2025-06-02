@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>KARAOKÊ LIST - Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="bg-dark">
+    <div class="container login-box">
+        <h1 class="title">KARAOKÊ LIST</h1>
+        <p class="subtitle">By KG Programs | WhatsApp (86) 9 8823-9577</p>
+        <form method="POST" action="/perfil">
+            <input type="text" name="usuario" placeholder="Digite seu nome de usuário" required class="input-text">
+            <button type="submit" class="btn">Entrar</button>
+        </form>
+    </div>
+</body>
+</html>
