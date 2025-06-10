@@ -1,0 +1,15 @@
+# Exported from Render on 2025-06-10T16:35:57Z
+services:
+- type: web
+  name: karaoke_site
+  runtime: python
+  repo: https://github.com/KLERISSONmm/karaoke_site
+  plan: free
+  envVars:
+  - key: YOUTUBE_V3
+    sync: false
+  region: oregon
+  buildCommand: pip install -r requirements.txt
+  startCommand: gunicorn your_application.wsgi
+  autoDeployTrigger: commit
+version: "1"
