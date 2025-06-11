@@ -132,7 +132,7 @@
                         <a href="{{ musica['link'] }}" target="_blank">🔗 Ver no YouTube</a>
                     </div>
                     <div class="acoes">
-                        <a href="{{ url_for('video', usuario=usuario, index=loop.index0) }}">▶️ Tocar</a>
+                        <a href="{{ url_for('player', usuario=usuario, index=loop.index0) }}">▶️ Tocar</a>
                         <a href="{{ url_for('excluir', usuario=usuario, index=loop.index0) }}">❌ Excluir</a>
                     </div>
                 </div>

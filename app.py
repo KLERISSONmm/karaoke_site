@@ -1,13 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
-import os, json, re, urllib.parse, requests, subprocess
-from pytubefix import YouTube
+import os, json, re, urllib.parse, requests
 
 app = Flask(__name__)
 
 DATA_FOLDER = "dados_karaoke"
-MUSIC_FOLDER = os.path.join(DATA_FOLDER, "musicas")
 IMAGE_FOLDER = os.path.join(DATA_FOLDER, "thumbnails")
-os.makedirs(MUSIC_FOLDER, exist_ok=True)
 os.makedirs(IMAGE_FOLDER, exist_ok=True)
 
 YOUTUBE_API_KEY = "AIzaSyBmDrhtOmHN9Q4TJCfMfrOR-QSDiX7PiF8"
@@ -80,6 +77,7 @@ def adicionar():
     musica = {
         "titulo": resultado['titulo'],
         "link": resultado['link'],
+        "video_id": resultado['id'],
         "thumbnail_url": resultado['thumbnail_url'],
         "thumbnail_path": f"/thumb/{resultado['id']}.jpg"
     }
@@ -92,40 +90,12 @@ def adicionar():
 def thumb(filename):
     return send_from_directory(IMAGE_FOLDER, filename)
 
-@app.route('/video/<usuario>/<int:index>')
-def video(usuario, index):
+@app.route('/player/<usuario>/<int:index>')
+def player(usuario, index):
     data = load_user_data(usuario)
     if index >= len(data): return "Erro: índice inválido"
     musica = data[index]
-    title = sanitize_filename(musica['titulo'])
-    filename = title + ".mp4"
-    filepath = os.path.join(MUSIC_FOLDER, filename)
-    if not os.path.exists(filepath):
-        yt = YouTube(musica['link'])
-        stream = yt.streams.filter(progressive=True, file_extension='mp4').order_by('resolution').desc().first()
-        if stream:
-            stream.download(output_path=MUSIC_FOLDER, filename=filename)
-    return send_from_directory(MUSIC_FOLDER, filename)
-
-@app.route('/favoritar', methods=['POST'])
-def favoritar():
-    user = request.form['usuario']
-    index = int(request.form['index'])
-    data = load_user_data(user)
-    if index >= len(data): return redirect(url_for('perfil') + f"?usuario={user}")
-    musica = data[index]
-    title = sanitize_filename(musica['titulo'])
-    filename = title + ".mp4"
-    filepath = os.path.join(MUSIC_FOLDER, filename)
-    musica['favorito'] = True
-    if not os.path.exists(filepath):
-        yt = YouTube(musica['link'])
-        stream = yt.streams.filter(progressive=True, file_extension='mp4').order_by('resolution').desc().first()
-        if stream:
-            stream.download(output_path=MUSIC_FOLDER, filename=filename)
-    data[index] = musica
-    save_user_data(user, data)
-    return redirect(url_for('perfil') + f"?usuario={user}")
+    return render_template("player.html", titulo=musica["titulo"], video_id=musica["video_id"], usuario=usuario)
 
 @app.route('/excluir/<usuario>/<int:index>')
 def excluir(usuario, index):
@@ -140,13 +110,6 @@ def excluir(usuario, index):
                 os.remove(path)
             except PermissionError:
                 pass
-
-    filepath = os.path.join(MUSIC_FOLDER, sanitize_filename(musica['titulo']) + ".mp4")
-    if os.path.exists(filepath):
-        try:
-            os.remove(filepath)
-        except PermissionError:
-            pass
 
     save_user_data(usuario, data)
     return redirect(url_for('perfil') + f"?usuario={usuario}")

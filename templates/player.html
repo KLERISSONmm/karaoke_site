@@ -11,10 +11,12 @@
             text-align: center;
             padding: 20px;
         }
-        video {
+        iframe {
             width: 90%;
             max-width: 800px;
+            height: 450px;
             border-radius: 12px;
+            border: none;
         }
         a {
             display: inline-block;
@@ -32,10 +34,13 @@
 </head>
 <body>
     <h1>{{ titulo }}</h1>
-    <video controls autoplay>
-        <source src="{{ video_url }}" type="video/mp4">
-        Seu navegador não suporta o player de vídeo HTML5.
-    </video>
+
+    <iframe 
+        src="https://www.youtube.com/embed/{{ video_id }}?autoplay=1&rel=0&showinfo=0"
+        allow="autoplay; encrypted-media"
+        allowfullscreen>
+    </iframe>
+
     <br>
     <a href="{{ url_for('perfil', usuario=usuario) }}">⬅️ Voltar para a lista</a>
 </body>
