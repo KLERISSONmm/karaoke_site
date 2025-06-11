@@ -1,1 +1,44 @@
-[]
+[
+    {
+        "titulo": "O SOL (Karaoke Version) Vitor Kley",
+        "link": "https://www.youtube.com/watch?v=2ha4RnX53sE",
+        "video_id": "2ha4RnX53sE",
+        "thumbnail_url": "https://i.ytimg.com/vi/2ha4RnX53sE/hqdefault.jpg",
+        "thumbnail_path": "/thumb/2ha4RnX53sE.jpg"
+    },
+    {
+        "titulo": "(VERSÃO KARAOKÊ ACUSTICO) Paulinho Moska - Pensando Em Você",
+        "link": "https://www.youtube.com/watch?v=gp83wE0RyWU",
+        "video_id": "gp83wE0RyWU",
+        "thumbnail_url": "https://i.ytimg.com/vi/gp83wE0RyWU/hqdefault.jpg",
+        "thumbnail_path": "/thumb/gp83wE0RyWU.jpg"
+    },
+    {
+        "titulo": "Lulu Santos - Toda forma de amor (Karaokê)",
+        "link": "https://www.youtube.com/watch?v=y16_Dk3iSiw",
+        "video_id": "y16_Dk3iSiw",
+        "thumbnail_url": "https://i.ytimg.com/vi/y16_Dk3iSiw/hqdefault.jpg",
+        "thumbnail_path": "/thumb/y16_Dk3iSiw.jpg"
+    },
+    {
+        "titulo": "Karaokê Desejo de Menina - Beijos, Blues e Poesia",
+        "link": "https://www.youtube.com/watch?v=DG1xrd4FhXw",
+        "video_id": "DG1xrd4FhXw",
+        "thumbnail_url": "https://i.ytimg.com/vi/DG1xrd4FhXw/hqdefault.jpg",
+        "thumbnail_path": "/thumb/DG1xrd4FhXw.jpg"
+    },
+    {
+        "titulo": "Karaokê Desejo de Menina - Diga Sim pra Mim",
+        "link": "https://www.youtube.com/watch?v=8WfrSJ9S3h0",
+        "video_id": "8WfrSJ9S3h0",
+        "thumbnail_url": "https://i.ytimg.com/vi/8WfrSJ9S3h0/hqdefault.jpg",
+        "thumbnail_path": "/thumb/8WfrSJ9S3h0.jpg"
+    },
+    {
+        "titulo": "Karaokê - Cama de Solteiro -  SEU DESEJO",
+        "link": "https://www.youtube.com/watch?v=cNuUzViCwAQ",
+        "video_id": "cNuUzViCwAQ",
+        "thumbnail_url": "https://i.ytimg.com/vi/cNuUzViCwAQ/hqdefault.jpg",
+        "thumbnail_path": "/thumb/cNuUzViCwAQ.jpg"
+    }
+]
