@@ -16,10 +16,27 @@
             padding: 20px;
             text-align: center;
             border-bottom: 3px solid #444;
+            position: relative;
         }
         h1 {
             margin: 0;
             font-size: 2em;
+        }
+        .btn-voltar {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            background-color: #444;
+            color: #eee;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .btn-voltar:hover {
+            background-color: #666;
         }
         .container {
             padding: 20px;
@@ -90,6 +107,7 @@
 </head>
 <body>
     <header>
+        <a href="{{ url_for('index') }}" class="btn-voltar">⬅️ Voltar</a>
         <h1>Bem-vindo, {{ usuario }}!</h1>
         <p>Sua lista de músicas</p>
     </header>
@@ -115,11 +133,6 @@
                     </div>
                     <div class="acoes">
                         <a href="{{ url_for('video', usuario=usuario, index=loop.index0) }}">▶️ Tocar</a>
-                        <form action="{{ url_for('favoritar') }}" method="post">
-                            <input type="hidden" name="usuario" value="{{ usuario }}">
-                            <input type="hidden" name="index" value="{{ loop.index0 }}">
-                            <button type="submit">⭐ Favoritar</button>
-                        </form>
                         <a href="{{ url_for('excluir', usuario=usuario, index=loop.index0) }}">❌ Excluir</a>
                     </div>
                 </div>

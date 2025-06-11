@@ -105,14 +105,7 @@ def video(usuario, index):
         stream = yt.streams.filter(progressive=True, file_extension='mp4').order_by('resolution').desc().first()
         if stream:
             stream.download(output_path=MUSIC_FOLDER, filename=filename)
-    try:
-        if os.name == 'nt':
-            os.startfile(filepath)
-        elif os.name == 'posix':
-            subprocess.Popen(['xdg-open', filepath])
-    except Exception as e:
-        return f"Erro ao tentar abrir o player: {e}"
-    return redirect(url_for('perfil') + f"?usuario={usuario}")
+    return send_from_directory(MUSIC_FOLDER, filename)
 
 @app.route('/favoritar', methods=['POST'])
 def favoritar():
@@ -158,7 +151,5 @@ def excluir(usuario, index):
     save_user_data(usuario, data)
     return redirect(url_for('perfil') + f"?usuario={usuario}")
 
-
 if __name__ == '__main__':
     app.run(debug=True)
-

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ titulo }}</title>
+    <style>
+        body {
+            background-color: #111;
+            color: #eee;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        video {
+            width: 90%;
+            max-width: 800px;
+            border-radius: 12px;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #444;
+            color: #eee;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        a:hover {
+            background-color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ titulo }}</h1>
+    <video controls autoplay>
+        <source src="{{ video_url }}" type="video/mp4">
+        Seu navegador não suporta o player de vídeo HTML5.
+    </video>
+    <br>
+    <a href="{{ url_for('perfil', usuario=usuario) }}">⬅️ Voltar para a lista</a>
+</body>
+</html>
