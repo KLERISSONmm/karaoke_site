@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Favoritos - {{ usuario }}</title>
+</head>
+<body style="background-color:#121212; color:white;">
+    <h1>Favoritos de {{ usuario }} | 
+        <a href="{{ url_for('logout') }}">Sair</a> | 
+        <a href="{{ url_for('index') }}">🔙 Voltar</a>
+    </h1>
+
+    <h2>Suas músicas favoritas</h2>
+    <ul>
+        {% for musica in favoritos %}
+            <li>
+                <strong>{{ musica.titulo }}</strong><br>
+                <img src="{{ musica.thumbnail_path }}" width="120"><br>
+                <a href="{{ url_for('tocar', index=loop.index0) }}">▶️ Tocar</a> | 
+                <a href="{{ url_for('excluir_favorito', index=loop.index0) }}">❌ Excluir</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -2,17 +2,78 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>KARAOKÊ LIST - Login</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>KARAOKÊ LIST - Início</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0f0f0f;
+            color: #aaf0d1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #00ff88;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #00ff88;
+        }
+
+        form {
+            background-color: #1a1a1a;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px #00ff88;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 250px;
+            border: 1px solid #00ff88;
+            border-radius: 8px;
+            background-color: #0a0a0a;
+            color: #aaf0d1;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #00ff88;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #00cc70;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 10px;
+            font-size: 12px;
+            color: #444;
+        }
+    </style>
 </head>
-<body class="bg-dark">
-    <div class="container login-box">
-        <h1 class="title">KARAOKÊ LIST</h1>
-        <p class="subtitle">By KG Programs | WhatsApp (86) 9 8823-9577</p>
-        <form method="POST" action="/perfil">
-            <input type="text" name="usuario" placeholder="Digite seu nome de usuário" required class="input-text">
-            <button type="submit" class="btn">Entrar</button>
-        </form>
-    </div>
+<body>
+    <h1>KARAOKÊ LIST 🎤</h1>
+    <form method="POST" action="{{ url_for('perfil') }}">
+        <input type="text" name="usuario" placeholder="Digite seu nome de usuário" required>
+        <button type="submit">Entrar</button>
+    </form>
+    <footer>
+        Desenvolvido por Klerisson • 2025
+    </footer>
 </body>
 </html>

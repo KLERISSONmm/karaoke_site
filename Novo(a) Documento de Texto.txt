@@ -1,1 +1,4 @@
-AIzaSyBmDrhtOmHN9Q4TJCfMfrOR-QSDiX7PiF8
+Flask==2.3.3
+pytubefix==1.0.1
+requests==2.31.0
+gunicorn==21.2.0
