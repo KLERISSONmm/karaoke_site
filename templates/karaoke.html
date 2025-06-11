@@ -1,24 +1,132 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-  <title>Karaokê de {{ usuario }}</title>
+    <meta charset="UTF-8">
+    <title>Perfil de {{ usuario }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #111;
+            color: #eee;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #222;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid #444;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+        .container {
+            padding: 20px;
+        }
+        .search-box {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .search-box input[type="text"] {
+            padding: 10px;
+            width: 60%;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .search-box button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #444;
+            color: #eee;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .search-box button:hover {
+            background-color: #666;
+        }
+        .musica {
+            background-color: #1c1c1c;
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .musica img {
+            height: 60px;
+            margin-right: 15px;
+            border-radius: 5px;
+        }
+        .info {
+            flex: 1;
+        }
+        .acoes {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        a, button {
+            background-color: #444;
+            color: #eee;
+            border: none;
+            padding: 8px 10px;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.2s;
+        }
+        a:hover, button:hover {
+            background-color: #666;
+        }
+        form {
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
-  <h1>Bem-vindo, {{ usuario }}</h1>
-  <form method="POST" action="/adicionar">
-    <input type="hidden" name="usuario" value="{{ usuario }}">
-    <input type="text" name="termo" placeholder="Buscar música" required />
-    <button type="submit">Adicionar</button>
-  </form>
-  <ul>
-    {% for musica in musicas %}
-      <li>
-        <p>{{ musica.titulo }}</p>
-        <img src="{{ musica.thumbnail_path }}" width="120" />
-        <iframe width="300" height="170" src="https://www.youtube.com/embed/{{ musica.video_id }}" frameborder="0" allowfullscreen></iframe>
-        <a href="/excluir/{{ usuario }}/{{ loop.index0 }}">Excluir</a>
-      </li>
-    {% endfor %}
-  </ul>
+    <header>
+        <h1>Bem-vindo, {{ usuario }}!</h1>
+        <p>Sua lista de músicas</p>
+    </header>
+
+    <div class="container">
+
+        <!-- Formulário de pesquisa -->
+        <div class="search-box">
+            <form action="/adicionar" method="post">
+                <input type="hidden" name="usuario" value="{{ usuario }}">
+                <input type="text" name="termo" placeholder="🔍 Pesquisar novas músicas..." required>
+                <button type="submit">Buscar</button>
+            </form>
+        </div>
+
+        {% if musicas %}
+            {% for musica in musicas %}
+                <div class="musica">
+                    <img src="{{ musica['thumbnail_path'] }}" alt="Thumbnail">
+                    <div class="info">
+                        <strong>{{ musica['titulo'] }}</strong><br>
+                        <a href="{{ musica['link'] }}" target="_blank">🔗 Ver no YouTube</a>
+                    </div>
+                    <div class="acoes">
+                        <a href="{{ url_for('video', usuario=usuario, index=loop.index0) }}">▶️ Tocar</a>
+                        <form action="{{ url_for('favoritar') }}" method="post">
+                            <input type="hidden" name="usuario" value="{{ usuario }}">
+                            <input type="hidden" name="index" value="{{ loop.index0 }}">
+                            <button type="submit">⭐ Favoritar</button>
+                        </form>
+                        <a href="{{ url_for('excluir', usuario=usuario, index=loop.index0) }}">❌ Excluir</a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Você ainda não adicionou nenhuma música.</p>
+        {% endif %}
+    </div>
 </body>
 </html>

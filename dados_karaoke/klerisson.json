@@ -3,7 +3,8 @@
         "titulo": "Legião Urbana - Vinte E Nove (Versão Karaokê)",
         "link": "https://www.youtube.com/watch?v=F_3C6sLdUmw",
         "thumbnail_url": "https://i.ytimg.com/vi/F_3C6sLdUmw/hqdefault.jpg",
-        "thumbnail_path": "/thumb/F_3C6sLdUmw.jpg"
+        "thumbnail_path": "/thumb/F_3C6sLdUmw.jpg",
+        "favorito": true
     },
     {
         "titulo": "Ritchie Menina Veneno Karaokê",
